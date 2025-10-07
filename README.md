@@ -18,6 +18,57 @@
 
 ## English
 
+## 📊 Cloud Data Pipeline Architecture
+
+```mermaid
+graph LR
+    A[Data Sources] --> B[Ingestion Layer]
+    B --> C{Cloud Storage}
+    C -->|AWS| D[S3]
+    C -->|GCP| E[GCS]
+    D --> F[Data Lake]
+    E --> F
+    F --> G[ETL Processing - Spark]
+    G --> H[Data Quality - Great Expectations]
+    H --> I{Data Warehouse}
+    I -->|AWS| J[Redshift]
+    I -->|GCP| K[BigQuery]
+    J --> L[Analytics Layer]
+    K --> L
+    L --> M[BI Tools]
+    G --> N[Airflow Orchestration]
+    N --> G
+    
+    style A fill:#e1f5ff
+    style M fill:#c8e6c9
+    style C fill:#fff9c4
+```
+
+## 🔄 ETL Pipeline Flow
+
+```mermaid
+sequenceDiagram
+    participant Source
+    participant Airflow
+    participant Spark
+    participant S3
+    participant Redshift
+    participant Monitor
+    
+    Airflow->>Source: Extract data
+    Source-->>Airflow: Raw data
+    Airflow->>S3: Store in data lake
+    Airflow->>Spark: Trigger transformation
+    Spark->>S3: Read raw data
+    Spark->>Spark: Transform & validate
+    Spark->>S3: Write processed data
+    Airflow->>Redshift: Load to warehouse
+    Airflow->>Monitor: Log metrics
+    Monitor-->>Airflow: Pipeline status
+```
+
+
+
 ### 📋 Overview
 
 Production-grade cloud data engineering pipeline implementing ETL/ELT processes on AWS and GCP. Features include Apache Airflow orchestration, PySpark for big data processing, data lake architecture (S3/GCS), data warehouse (Redshift/BigQuery), streaming (Kinesis/Pub/Sub), and data quality monitoring.
