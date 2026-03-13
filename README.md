@@ -2,6 +2,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker)](Dockerfile)
 
 Pipeline ETL autocontido com validacao de qualidade de dados, transformacoes composiveis, particionamento, conectores CSV/JSON/SQLite e orquestrador de pipeline com metricas de execucao.
 
